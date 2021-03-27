@@ -9,7 +9,7 @@
 import UIKit
 import ToolKit
 import RuntimeKit
-import CraftKit
+//import CraftKit KRD - 3/27/21
 
 class CodeaProjectViewController: CodeaViewController {
 
@@ -37,7 +37,7 @@ class CodeaProjectViewController: CodeaViewController {
         
         let project = Project(bundlePath: url.path)
         
-        register(CraftAddon())
+        //register(CraftAddon()) KRD - 3/27/21
         register(addon)
         
         AssetManager.sharedInstance().allowDropboxAssetPack = false

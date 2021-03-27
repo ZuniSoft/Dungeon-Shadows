@@ -31,8 +31,6 @@
 		DB83FB7B223DC2E5005750D2 /* ProjectModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = DB83FB7A223DC2E5005750D2 /* ProjectModule.mm */; };
 		DBE42037260B81F5002BF271 /* ToolKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE42036260B81F5002BF271 /* ToolKit.xcframework */; };
 		DBE42038260B81F5002BF271 /* ToolKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBE42036260B81F5002BF271 /* ToolKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DBE4203A260B8257002BF271 /* CraftKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE42039260B8257002BF271 /* CraftKit.xcframework */; };
-		DBE4203B260B8257002BF271 /* CraftKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBE42039260B8257002BF271 /* CraftKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBE4203D260B833D002BF271 /* RuntimeKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE4203C260B833D002BF271 /* RuntimeKit.xcframework */; };
 		DBE4203E260B833D002BF271 /* RuntimeKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBE4203C260B833D002BF271 /* RuntimeKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -46,7 +44,6 @@
 			files = (
 				DBE42038260B81F5002BF271 /* ToolKit.xcframework in Embed Frameworks */,
 				DBE4203E260B833D002BF271 /* RuntimeKit.xcframework in Embed Frameworks */,
-				DBE4203B260B8257002BF271 /* CraftKit.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,7 +93,6 @@
 			files = (
 				DBE42037260B81F5002BF271 /* ToolKit.xcframework in Frameworks */,
 				DBE4203D260B833D002BF271 /* RuntimeKit.xcframework in Frameworks */,
-				DBE4203A260B8257002BF271 /* CraftKit.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
