@@ -16,7 +16,7 @@ function setup()
     viewer.mode = FULLSCREEN_NO_BUTTONS
     
     -- global variables
-    ver = 1.00
+    ver = 1.02
     playMusic = true
     playSFX = true
     resetGame = false
