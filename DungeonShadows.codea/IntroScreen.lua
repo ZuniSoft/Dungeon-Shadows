@@ -1,13 +1,13 @@
 IntroScreen = class()
 
 function IntroScreen:init()
-    self.startBtn = Button(WIDTH / 2, 150, asset.documents.Dungeon_Shadows_assets.Yellow_Button_13)
+    self.startBtn = Button(WIDTH / 2, 150, asset.documents.Dungeon_Shadows_assets.Yellow_Button_13, "Start", "Optima-ExtraBlack", 24)
     self.startBtn.w = 100
-    self.okBtn = Button(WIDTH / 2, 150, asset.documents.Dungeon_Shadows_assets.Yellow_Button_13)
+    self.okBtn = Button(WIDTH / 2, 150, asset.documents.Dungeon_Shadows_assets.Yellow_Button_13, "OK", "Optima-ExtraBlack", 24)
     self.okBtn.w = 100
-    self.infoBtn = Button(WIDTH / 2, 80, asset.documents.Dungeon_Shadows_assets.Grey_Button_01)
+    self.infoBtn = Button(WIDTH / 2 - 100, 80, asset.documents.Dungeon_Shadows_assets.Grey_Button_01, "About", "Optima-ExtraBlack", 24)
     self.infoBtn.w = 100
-    self.settingsBtn = Button(WIDTH / 2, 80, asset.documents.Dungeon_Shadows_assets.Grey_Button_01)
+    self.settingsBtn = Button(WIDTH / 2 + 100, 80, asset.documents.Dungeon_Shadows_assets.Grey_Button_01, "Settings", "Optima-ExtraBlack", 24)
     self.settingsBtn.w = 100
     self.mode = 1
 end
@@ -20,23 +20,15 @@ function IntroScreen:draw()
     noTint()
     local i
     if self.mode == 1 then
-        self.startBtn.x = WIDTH / 2
-        self.infoBtn.x = WIDTH / 2 - 100
-        self.settingsBtn.x = WIDTH / 2 + 100
-        
         sprite(asset.documents.Dungeon_Shadows_assets.Logo,WIDTH // 2,HEIGHT - 60, 230,75)
-        
         textMode(CENTER)
         font("Optima-ExtraBlack")
-        
         fill(214, 214, 214, 255)
         fontSize(80)
         text("Dungeon Shadows", WIDTH // 2, HEIGHT - 150)
-        
         fill(174, 167, 167)
         fontSize(79)
         text("Dungeon Shadows", WIDTH // 2, HEIGHT - 150)
-        
         local x
         for i = 1, #avatars do
             x = WIDTH / #avatars + 1
@@ -48,15 +40,12 @@ function IntroScreen:draw()
         rectMode(CENTER)
         self.startBtn:draw()
         self.infoBtn:draw()
-
         self.settingsBtn:draw()
-
         rect(x * avatarNum - x / 2, HEIGHT - HEIGHT // 3 + 2, 
         96, 96)
         fontSize(24)
         fill(186, 192, 183, 255)
         text("Select an Avatar", WIDTH // 2, HEIGHT - HEIGHT // 3 - 90)
-        
         for i = 1, #shields do
             x = WIDTH / #shields + 1
             local sx, sy
@@ -74,7 +63,6 @@ function IntroScreen:draw()
             sprite(shields[i], 0, 0, 64, 54)
             popMatrix()
         end
-        
         stroke(184, 223, 161, 255)
         fill(255, 180, 0, 0)
         strokeWidth(4)
@@ -93,30 +81,17 @@ function IntroScreen:draw()
         fill(172, 171, 171, 255)
         text("Available Gold", WIDTH / 2, HEIGHT / 2 - 190)
         fontSize(24)
-        fill(90, 71, 71, 255)
-        text("Start", WIDTH // 2, self.startBtn.y)
-        text("About", WIDTH // 2 - 100, self.infoBtn.y)
-        text("Settings", WIDTH // 2 + 100, self.settingsBtn.y)
         font("HelveticaNeue")
     end
     if self.mode == 2 then
-        self.okBtn.x = WIDTH / 2
         self.okBtn:draw()
-        
-        sprite(asset.documents.Dungeon_Shadows_assets.Logo,WIDTH / 2,HEIGHT - 100)
-
-        font("Optima-ExtraBlack")
-        fontSize(24)
-        fill(90, 71, 71, 255)
-        text("OK", WIDTH // 2, 150)
-        
-        font("HelveticaNeue")
-        if WIDTH < 700 then fontSize(20) else fontSize(24) end
+        sprite(asset.documents.Dungeon_Shadows_assets.Logo,WIDTH / 2,HEIGHT - 100)        
         fill(171, 195, 188, 255)
-        textMode(CENTER)
+        font("HelveticaNeue")
         fontSize(48)
         text("Dungeon Shadows", WIDTH / 2, HEIGHT - 350)
-        fontSize(24)
+        if WIDTH < 700 then fontSize(18) else fontSize(24) end
+        textMode(CENTER)
         text("A dungeon crawler with random level creation.", WIDTH / 2, HEIGHT - 400)
         text("Copyright © Keith R. Davis 2021", WIDTH / 2, HEIGHT - 500)
         text("Copyright © Mark Sumner 2019", WIDTH / 2, HEIGHT - 540)
@@ -124,14 +99,8 @@ function IntroScreen:draw()
         text("Version " .. ver, WIDTH / 2, 75)
     end
     if self.mode == 3 then
-        self.okBtn.x = WIDTH / 2
         self.okBtn:draw()
-        musicButton.y = HEIGHT / 2 + 50
-        sfxButton.y = HEIGHT / 2
-        resetGameButton.y = HEIGHT / 2 - 50
-        
         sprite(asset.documents.Dungeon_Shadows_assets.Logo,WIDTH // 2,HEIGHT - 100)
-        
         musicButton:draw()
         sfxButton:draw()
         resetGameButton:draw()
@@ -145,10 +114,6 @@ function IntroScreen:draw()
         if resetGame then
             sprite(asset.documents.Dungeon_Shadows_assets.Blue_Check,resetGameButton.x,resetGameButton.y)
         end
-        fontSize(24)
-        fill(90, 71, 71, 255)
-        font("Optima-ExtraBlack")
-        text("OK", WIDTH // 2, 150)
         font("HelveticaNeue")
         fontSize(24)
         if WIDTH < 700 then fontSize(20) end

@@ -19,13 +19,35 @@ function Floor:init()
             self.tiles[y][x] = "0"
         end
     end
-    -- add some rooms
+    -- add some rooms, tunnels, floor grids, and walls
     numRooms = math.random(floorNum) + 5
     for i= 1, numRooms do
         self:addRoom(i)
     end
     for i= 1, numRooms do
         self:carveTunnel(i)
+    end
+    self:addWalls()
+    -- floor grid
+    cnt = 0
+    while cnt < 5 + floorNum do
+        x = math.random(50)
+        y = math.random(50)
+        if self.tiles[y][x] == "-" and self.tiles[y - 1][x] == "-" then
+            self.tiles[y][x] = "g"
+            cnt = cnt + 1
+        end
+    end
+    -- floor skeleton
+    cnt = 0
+    while cnt < 3 + floorNum do
+        x = math.random(50)
+        y = math.random(50)
+        if self.tiles[y][x] == "-" and self.tiles[y - 1][x] == "-" then
+            s = math.random(2)
+            self.tiles[y][x] = "b" .. s
+            cnt = cnt + 1
+        end
     end
     -- keys
     cnt = 0
@@ -128,7 +150,7 @@ function Floor:addRoom(n)
             then
             for rx = x, x + w do
                 for ry = y, y + h do
-                    if rx > 1 and rx < 50 and ry > 1 and ry < 50 then 
+                    if rx > 2 and rx < 49 and ry > 2 and ry < 49 then 
                         self.tiles[ry][rx] = "-"
                     end
                 end
@@ -178,6 +200,20 @@ function Floor:carveTunnel(n)
     end
 end
 
+function Floor:addWalls()
+    -- add some walls
+    for y = 2, 49 do
+        for x = 2, 49 do
+            if self.tiles[y][x] == "0" and (self.tiles[y][x + 1] == "-" or
+            self.tiles[y + 1][x] == "-" or self.tiles[y + 1][x + 1] == "-" or
+            self.tiles[y][x - 1] == "-" or self.tiles[y - 1][x] == "-" or
+            self.tiles[y - 1][x - 1] == "-") then
+                self.tiles[y][x] = "w"
+            end
+        end
+    end
+end
+
 function Floor:draw(cx, cy)
     -- move to keep character more centered
     cols = WIDTH // 48
@@ -217,6 +253,24 @@ function Floor:draw(cx, cy)
                 end
                 sprite(asset.documents.Dungeon_Shadows_assets.Greysand,bx,by,48,80)
             end
+            -- floor grid
+            if c == "g" then
+                if math.fmod(cnt, 2) == 0 then
+                    tint(t + 15, t + 15, t + 15, 255)
+                end
+                sprite(asset.documents.Dungeon_Shadows_assets.Floor_Grid,bx,by + 14,48,48)
+            end
+            -- floor skeleton
+            if c == "b1" or c == "b2"then
+                if math.fmod(cnt, 2) == 0 then
+                    tint(t + 15, t + 15, t + 15, 255)
+                end
+                if c == "b1" then
+                    sprite(asset.documents.Dungeon_Shadows_assets.Skeleton_1,bx,by + 14,48,48)
+                else
+                    sprite(asset.documents.Dungeon_Shadows_assets.Skeleton_2,bx,by + 14,48,48)
+                end
+            end
             -- key
             if c == "x" then
                 sprite(asset.documents.Dungeon_Shadows_assets.Greysand,bx,by,48,80)
@@ -253,18 +307,15 @@ function Floor:draw(cx, cy)
             end
             -- stone block
             if c == "0" then
-                if floorNum > 2 then
-                    tint(t + 15, t, t, 255)
-                end
-                if floorNum > 4 then
-                    tint(t, t + 15, t, 255)
-                end
-                if floorNum > 6 then
-                    tint(t, t, t + 15, 255)
-                end
                 local adj=1
                 if math.fmod(x,2)==math.fmod(y,2) then adj=-1 end
                 sprite(asset.documents.Dungeon_Shadows_assets.Stone_Block,bx,by + 32,adj*48,96)
+            end
+            -- wall block
+            if c == "w" then
+                local adj=1
+                if math.fmod(x,2)==math.fmod(y,2) then adj=-1 end
+                sprite(asset.documents.Dungeon_Shadows_assets.Wall_Block,bx,by + 32,adj*48,96)
             end
             -- chest closed
             if c == "c" then
@@ -329,11 +380,16 @@ function Floor:draw(cx, cy)
         tint(hitTint)
         sprite(avatars[avatarNum],bx,by + 26,cw,ch)
         if weapon > 1 then
+            local adjx
+            local adjy
             if cw < 0 then
-                sprite(asset.documents.Dungeon_Shadows_assets.Sword,bx + 8,by + 26,9,32)
+                adjx = 8
+                adjy = 26
             else
-                sprite(asset.documents.Dungeon_Shadows_assets.Sword,bx + 9,by + 28,9,32)
+                adjx = 9
+                adjy = 28
             end
+            sprite(asset.documents.Dungeon_Shadows_assets.Sword,bx + adjx,by + adjy,9,32)
         end
         if sheildNum > 0 then
             pushMatrix()
@@ -351,6 +407,10 @@ function Floor:check(x, y)
     c = self.tiles[y][x]
     -- empty space
     if c == "-" then return true end
+    -- floor grid
+    if c == "g" then return true end
+    -- floor skeleton
+    if c == "b1" or c == "b2" then return true end
     -- keys
     if c == "x" then 
         SFX(asset.documents.Dungeon_Shadows_assets.Bell_2)

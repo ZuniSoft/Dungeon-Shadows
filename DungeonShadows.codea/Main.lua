@@ -16,10 +16,10 @@ function setup()
     viewer.mode = FULLSCREEN_NO_BUTTONS
     
     -- global variables
-    ver = 1.02
+    ver = 1.10
     playMusic = true
     playSFX = true
-    resetGame = false
+    resetGame = true
     isBattle = false
     monsterClose = false
     musicVol = 1
@@ -111,11 +111,11 @@ function setup()
     introScreen = IntroScreen()
     
     -- controls
-    musicButton = Button(120, 20, asset.documents.Dungeon_Shadows_assets.Grey_Circle)
+    musicButton = Button(120, HEIGHT / 2 + 50, asset.documents.Dungeon_Shadows_assets.Grey_Circle)
     musicButton.w = 200
-    sfxButton = Button(120, 20, asset.documents.Dungeon_Shadows_assets.Grey_Circle)
+    sfxButton = Button(120, HEIGHT / 2, asset.documents.Dungeon_Shadows_assets.Grey_Circle)
     sfxButton.w = 200
-    resetGameButton = Button(120, 20, asset.documents.Dungeon_Shadows_assets.Grey_Circle)
+    resetGameButton = Button(120, HEIGHT / 2 - 50, asset.documents.Dungeon_Shadows_assets.Grey_Circle)
     resetGameButton.w = 200
     returnButton = Button(20, HEIGHT - 20, asset.documents.Dungeon_Shadows_assets.Grey_Slider_Left)
     dialog = Dialog(100, 400, "Try Again?")
@@ -519,7 +519,6 @@ function touched(touch)
                     table.insert(messages, fm)
                     return
                 end
-                --if playSFX then sound(SOUND_EXPLODE, 10272) end
                 local s = math.random(m.strength)
                 fm = FloatingMessage(s, screenMap(m.x, m.y))
                 fm.tint = color(255, 0, 18, 255)

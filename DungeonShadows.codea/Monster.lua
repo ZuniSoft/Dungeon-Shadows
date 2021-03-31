@@ -2,29 +2,21 @@ Monster = class()
 
 montypes = {}
 montypes[1] = {"Green Meanie", 1, 1, true,
-asset.documents.Dungeon_Shadows_assets.Green_Fluff_1, asset.documents.Dungeon_Shadows_assets.Green_Fluff_2,
-    color(187, 191, 187, 255)}
+asset.documents.Dungeon_Shadows_assets.Green_Fluff_1, asset.documents.Dungeon_Shadows_assets.Green_Fluff_2}
 montypes[2] = {"Flying Blob", 2, 1, true,
-asset.documents.Dungeon_Shadows_assets.Blob_Bat_1, asset.documents.Dungeon_Shadows_assets.Blob_Bat_2,
-    color(129, 176, 108, 255)}
+asset.documents.Dungeon_Shadows_assets.Blob_Bat_1, asset.documents.Dungeon_Shadows_assets.Blob_Bat_2}
 montypes[3] = {"Green Grump", 2, 2, true,
-asset.documents.Dungeon_Shadows_assets.Green_Grump_1, asset.documents.Dungeon_Shadows_assets.Green_Grump_2,
-    color(137, 147, 223, 255)}
+asset.documents.Dungeon_Shadows_assets.Green_Grump_1, asset.documents.Dungeon_Shadows_assets.Green_Grump_2}
 montypes[4] = {"Yellow Meanie", 2, 3, true,
-asset.documents.Dungeon_Shadows_assets.Yellow_Fluff_1, asset.documents.Dungeon_Shadows_assets.Yellow_Fluff_2,
-    color(238, 238, 241, 255)}
+asset.documents.Dungeon_Shadows_assets.Yellow_Fluff_1, asset.documents.Dungeon_Shadows_assets.Yellow_Fluff_2}
 montypes[5] = {"Blue Rhino", 3, 3, true,
-asset.documents.Dungeon_Shadows_assets.Blue_Rhino_1, asset.documents.Dungeon_Shadows_assets.Blue_Rhino_2,
-    color(35, 217, 65, 255)}
+asset.documents.Dungeon_Shadows_assets.Blue_Rhino_1, asset.documents.Dungeon_Shadows_assets.Blue_Rhino_2}
 montypes[6] = {"Gray Rhino", 3, 3, true,
-asset.documents.Dungeon_Shadows_assets.Gray_Rhino_1, asset.documents.Dungeon_Shadows_assets.Gray_Rhino_2,
-    color(178, 83, 48, 255)}
+asset.documents.Dungeon_Shadows_assets.Gray_Rhino_1, asset.documents.Dungeon_Shadows_assets.Gray_Rhino_2}
 montypes[7] = {"Purple Demon", 3, 4, true,
-asset.documents.Dungeon_Shadows_assets.Purple_Demon_1, asset.documents.Dungeon_Shadows_assets.Purple_Demon_2,
-    color(186, 186, 186, 255)}
+asset.documents.Dungeon_Shadows_assets.Purple_Demon_1, asset.documents.Dungeon_Shadows_assets.Purple_Demon_2}
 montypes[8] = {"Green Dragon", 4, 4, true,
-asset.documents.Dungeon_Shadows_assets.Green_Dragon_1, asset.documents.Dungeon_Shadows_assets.Green_Dragon_2,
-    color(186, 186, 186, 255)}
+asset.documents.Dungeon_Shadows_assets.Green_Dragon_1, asset.documents.Dungeon_Shadows_assets.Green_Dragon_2}
 
 function Monster:init(n, f)
     local m = montypes[math.random(n)]
@@ -39,7 +31,6 @@ function Monster:init(n, f)
     self.dy = 0
     self.image1 = m[5]
     self.image2 = m[6]
-    self.tint = m[7]
     sprite()
     found = false
     while not found do
@@ -91,7 +82,6 @@ function Monster:draw(ox, oy)
         sprite()
         return
     end
-    tint(self.tint)
     -- flip sprite if going in a neg dir
     if self.dx == -1 then
         width = width * -1
@@ -123,7 +113,6 @@ function Monster:drawCard()
         textMode(CENTER)
         text(self.name, WIDTH - 360, 190)
         textMode(CORNER)
-        tint(self.tint)
         sprite(self.image1, WIDTH - 360, 145, 64, 64)
         noTint()
         fill(0, 0, 0, 255)

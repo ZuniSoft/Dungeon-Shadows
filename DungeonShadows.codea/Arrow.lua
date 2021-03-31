@@ -47,7 +47,7 @@ function Arrow:hitWall()
     while not found do
         x = x + self.ax
         y = y + self.ay
-        if floor.tiles[y][x] == "0" then
+        if floor.tiles[y][x] == "w" then
             found = true
         end
     end
